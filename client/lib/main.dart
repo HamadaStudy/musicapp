@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:client/features/atuh/view/pages/signup_page.dart';
 import 'package:client/features/atuh/view/pages/login_page.dart';
 import './core/theme/thema.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(ProviderScope(child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: AppTheme.darkThemeMode,
-      home: LoginPage(),
+      home: SignupPage(),
     );
   }
 }

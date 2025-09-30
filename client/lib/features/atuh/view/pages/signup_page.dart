@@ -1,16 +1,21 @@
+import 'package:client/features/atuh/repositories/auth_remote_repository.dart';
+import 'package:client/features/atuh/view/pages/login_page.dart';
 import 'package:client/features/atuh/view/widgets/auth_gradient_button.dart';
 import 'package:client/features/atuh/view/widgets/custom_field.dart';
+import 'package:client/features/atuh/viewmodel/auth_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:client/core/theme/app_pallete.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fpdart/fpdart.dart';
 
-class SignupPage extends StatefulWidget {
+class SignupPage extends ConsumerStatefulWidget {
   const SignupPage({super.key});
 
   @override
-  State<SignupPage> createState() => _SignupPageState();
+  ConsumerState<SignupPage> createState() => _SignupPageState();
 }
 
-class _SignupPageState extends State<SignupPage> {
+class _SignupPageState extends ConsumerState<SignupPage> {
   final nameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
@@ -50,21 +55,42 @@ class _SignupPageState extends State<SignupPage> {
                 isObscureText: true,
               ),
               const SizedBox(height: 20),
-              AuthGradientButton(buttonText: 'Sign Up', onTap: () {}),
+              AuthGradientButton(
+                buttonText: 'Sign Up',
+                onTap: () async {
+                  if (formKey.currentState!.validate()) {
+                    await ref
+                        .read(authViewmodelProvider.notifier)
+                        .SignUpUser(
+                          name: nameController.text,
+                          email: emailController.text,
+                          password: passwordController.text,
+                        );
+                  }
+                },
+              ),
               const SizedBox(height: 20),
-              RichText(
-                text: TextSpan(
-                  text: 'Already have an accont? ',
-                  style: Theme.of(context).textTheme.titleMedium,
-                  children: [
-                    TextSpan(
-                      text: 'Sign In',
-                      style: TextStyle(
-                        color: Pallete.gradient2,
-                        fontWeight: FontWeight.bold,
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const LoginPage()),
+                  );
+                },
+                child: RichText(
+                  text: TextSpan(
+                    text: 'Already have an accont? ',
+                    style: Theme.of(context).textTheme.titleMedium,
+                    children: [
+                      TextSpan(
+                        text: 'Sign In',
+                        style: TextStyle(
+                          color: Pallete.gradient2,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ],

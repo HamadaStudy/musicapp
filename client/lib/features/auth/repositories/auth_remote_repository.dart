@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:client/features/atuh/model/user_model.dart';
+import 'package:client/features/auth/model/user_model.dart';
 import 'package:client/core/failure/app_failure.dart';
 import 'package:client/core/constants/server_constat.dart';
 import 'package:fpdart/fpdart.dart';

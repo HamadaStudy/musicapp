@@ -1,10 +1,10 @@
 import 'package:client/core/utils.dart';
-import 'package:client/features/atuh/repositories/auth_remote_repository.dart';
-import 'package:client/features/atuh/view/pages/signup_page.dart';
-import 'package:client/features/atuh/view/widgets/auth_gradient_button.dart';
-import 'package:client/features/atuh/view/widgets/custom_field.dart';
-import 'package:client/features/atuh/view/widgets/loader.dart';
-import 'package:client/features/atuh/viewmodel/auth_viewmodel.dart';
+import 'package:client/features/auth/repositories/auth_remote_repository.dart';
+import 'package:client/features/auth/view/pages/signup_page.dart';
+import 'package:client/features/auth/view/widgets/auth_gradient_button.dart';
+import 'package:client/features/auth/view/widgets/custom_field.dart';
+import 'package:client/features/auth/view/widgets/loader.dart';
+import 'package:client/features/auth/view_model/auth_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:client/core/theme/app_pallete.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -31,8 +31,8 @@ class _LoginPageState extends ConsumerState<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    final isLoading = ref.watch(authViewmodelProvider)?.isLoading == true;
-    ref.listen(authViewmodelProvider, (_, next) {
+    final isLoading = ref.watch(authViewModelProvider)?.isLoading == true;
+    ref.listen(authViewModelProvider, (_, next) {
       next?.when(
         data: (data) {
           // TODO navigate to HomePage

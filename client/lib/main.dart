@@ -8,26 +8,55 @@ import 'package:client/features/auth/view/pages/login_page.dart';
 import './core/theme/thema.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-void main() async {
+// main.dart
+void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  final container = ProviderContainer();
-  await container.read(authViewModelProvider.notifier).initSharedPreferences();
-  await container.read(authViewModelProvider.notifier).getData();
-  runApp(UncontrolledProviderScope(container: container, child: const MyApp()));
+  runApp(
+    const ProviderScope(  // UncontrolledProviderScopeの代わりにProviderScopeを使用
+      child: MyApp(),
+    ),
+  );
 }
 
-class MyApp extends ConsumerWidget {
+class MyApp extends ConsumerStatefulWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends ConsumerState<MyApp> {
+  @override
+  void initState() {
+    super.initState();
+    // ビルド後に初期化を実行
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      final authNotifier = ref.read(authViewModelProvider.notifier);
+      await authNotifier.initSharedPreferences();
+      await authNotifier.getData();
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final currentUser = ref.watch(currentUserProvider);
+    final authState = ref.watch(authViewModelProvider);
+    
+    // ローディング中の表示
+    if (authState is AsyncLoading) {
+      return MaterialApp(
+        title: 'Music App',
+        theme: AppTheme.darkThemeMode,
+        home: const Scaffold(
+          body: Center(child: CircularProgressIndicator()),
+        ),
+      );
+    }
+    
     return MaterialApp(
       title: 'Music App',
       theme: AppTheme.darkThemeMode,
-      home: LoginPage()
-      // home: currentUser == null ? const SignupPage() : HomePage(),
+      home: currentUser == null ? const SignupPage() : const HomePage(),
     );
   }
 }

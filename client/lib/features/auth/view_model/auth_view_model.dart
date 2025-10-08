@@ -1,9 +1,10 @@
-import 'package:client/core/provider/current_user_notifier.dart';
-import 'package:client/features/auth/model/user_model.dart';
-import 'package:client/features/auth/repositories/auth_local_repository.dart';
-import 'package:client/features/auth/repositories/auth_remote_repository.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:client/core/provider/current_user_notifier.dart';
+import 'package:client/features/auth/models/user_model.dart';
+import 'package:client/features/auth/repositories/auth_local_repository.dart';
+import 'package:client/features/auth/repositories/auth_remote_repository.dart';
+
 part 'auth_view_model.g.dart';
 
 @riverpod

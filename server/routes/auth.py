@@ -1,7 +1,7 @@
 import uuid
 import bcrypt
 from fastapi import Depends, HTTPException, Header
-from middle_ware.middle_ware import auth_middleware
+from auth_middleware.auth_middleware import auth_middleware
 from models.user import User
 from pydantic_schemas.user_create import UserCreate
 from fastapi import APIRouter

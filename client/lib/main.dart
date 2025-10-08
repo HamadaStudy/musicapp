@@ -1,5 +1,5 @@
 import 'package:client/core/provider/current_user_notifier.dart';
-import 'package:client/features/auth/model/user_model.dart';
+import 'package:client/features/auth/models/user_model.dart';
 import 'package:client/features/auth/view_model/auth_view_model.dart';
 import 'package:client/features/home/view/pages/home_page.dart';
 import 'package:client/features/home/view/pages/upload_song_page.dart';
@@ -57,7 +57,7 @@ class _MyAppState extends ConsumerState<MyApp> {
     return MaterialApp(
       title: 'Music App',
       theme: AppTheme.darkThemeMode,
-      home: currentUser == null ? const SignupPage() : const UploadSongPage(),
+      home: currentUser == null ? const SignupPage() : const HomePage(),
     );
   }
 }

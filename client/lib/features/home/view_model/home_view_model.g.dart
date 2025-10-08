@@ -9,6 +9,45 @@ part of 'home_view_model.dart';
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
 
+@ProviderFor(getAllSongs)
+const getAllSongsProvider = GetAllSongsProvider._();
+
+final class GetAllSongsProvider
+    extends
+        $FunctionalProvider<
+          AsyncValue<List<SongModel>>,
+          List<SongModel>,
+          FutureOr<List<SongModel>>
+        >
+    with $FutureModifier<List<SongModel>>, $FutureProvider<List<SongModel>> {
+  const GetAllSongsProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'getAllSongsProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$getAllSongsHash();
+
+  @$internal
+  @override
+  $FutureProviderElement<List<SongModel>> $createElement(
+    $ProviderPointer pointer,
+  ) => $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<List<SongModel>> create(Ref ref) {
+    return getAllSongs(ref);
+  }
+}
+
+String _$getAllSongsHash() => r'36bd4bb2847e69abae543b24d4e86a9baf96e4d6';
+
 @ProviderFor(HomeViewModel)
 const homeViewModelProvider = HomeViewModelProvider._();
 
@@ -41,7 +80,7 @@ final class HomeViewModelProvider
   }
 }
 
-String _$homeViewModelHash() => r'e36d445fc78c5e5eed5950c3431459618c1d3ef5';
+String _$homeViewModelHash() => r'3b979648ed6f81aa6ac283fe946d0a8b782ac3d9';
 
 abstract class _$HomeViewModel extends $Notifier<AsyncValue<dynamic>?> {
   AsyncValue<dynamic>? build();
